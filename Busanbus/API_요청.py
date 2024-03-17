@@ -17,9 +17,10 @@ def busStop ():
     response = requests.get(url, params=params)
     decodecontent = response.content.decode('utf-8') 
     xmlParser = BeautifulSoup(decodecontent,'xml')
-    contents =  xmlParser.select_one('items').get_text().strip()
-    content = contents.split('\n\n\n')
-    print(content[0])
+    items= xmlParser.select("item")
+    item = items[0].text.split('\n')
+    return item
+
 
     ## content[0] == 요청한 첫번 째 정보
     ## 정류소 아이디
@@ -29,7 +30,7 @@ def busStop ():
     ## 정류장 구분 순으로 데이터 정제
 
 
-busStop()
+print(busStop())
 
 
 # 버스 번호로 노선 검색하기
